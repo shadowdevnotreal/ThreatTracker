@@ -1,0 +1,23 @@
+{
+    "feeds": {
+        "Troy Hunt": "https://feeds.feedburner.com/TroyHunt",
+        "Threatpost": "https://threatpost.com/feed",
+        "ZDNet": "https://www.zdnet.com/news/rss.xml",
+        "Schneier on Security": "https://www.schneier.com/blog/atom.xml",
+        "CSO Online": "https://www.csoonline.com/index.rss",
+        "Security Week": "https://www.securityweek.com/rss",
+        "Krebs on Security": "https://krebsonsecurity.com/feed",
+        "Dark Reading": "https://www.darkreading.com/rss.xml",
+        "The Hackers News": "https://feeds.feedburner.com/TheHackersNews",
+        "Naked Security": "https://nakedsecurity.sophos.com/feed",
+        "Bleeping Computer": "https://www.bleepingcomputer.com/feed/",
+        "The Hacker News": "https://thehackernews.com/feeds/posts/default",
+        "Infosecurity Magazine": "https://www.infosecurity-magazine.com/rss/news",
+        "Wired": "https://www.wired.com/feed/rss",
+        "ZDNet Security": "https://www.zdnet.com/security/rss.xml",
+        "Help Net Security": "https://feeds.feedburner.com/HelpNetSecurity",
+        "FireEye Threat Research": "https://www.fireeye.com/blog/threat-research/_jcr_content.feed",
+        "SentinelOne Labs": "https://labs.sentinelone.com/feed/",
+        "Recorded Future": "https://www.recordedfuture.com/feed/"
+    }
+}
