@@ -1,83 +1,50 @@
-#!/usr/bin/python3
+from security_news import fetch_news, fetch_feeds, print_news, add_feed, remove_feed
+import sys
 
-import feedparser
-import argparse
-import logging
-from colorama import Fore, Style
-
-# Define the feed URLs
-urls = [
-    'https://feeds.feedburner.com/TroyHunt',
-    'https://threatpost.com/feed',
-    'https://www.zdnet.com/news/rss.xml',
-    'https://www.schneier.com/blog/atom.xml',
-    'https://www.csoonline.com/index.rss',
-    'https://www.securityweek.com/rss',
-    'https://krebsonsecurity.com/feed',
-    'https://www.darkreading.com/rss.xml',
-    'https://www.darkreading.com/rss_simple.asp',
-    'https://feeds.feedburner.com/TheHackersNews',
-    'https://nakedsecurity.sophos.com/feed',
-    'https://www.bleepingcomputer.com/feed/'
-]
-
-# Define colors for the output
-TITLE_COLOR = Fore.CYAN
-LINK_COLOR = Fore.YELLOW
-RESET_COLOR = Style.RESET_ALL
+def fetch_single_feed():
+    feed_list = sn.get_feed_list()
+    print("Available feeds:")
+    for feed in feed_list:
+        print(feed)
+    feed_number = input("Enter feed number: ")
+    ...
 
 def main():
-    # Configure argument parser
-    parser = argparse.ArgumentParser(description='Display recent articles from security news feeds.')
-    parser.add_argument('-n', '--num-articles', type=int, default=5, help='Number of articles to display (default: 5)')
-    parser.add_argument('-f', '--output-format', choices=['text', 'html', 'json'], default='text', help='Output format (default: text)')
-    parser.add_argument('-v', '--verbose', action='store_true', help='Enable verbose logging')
-    args = parser.parse_args()
+    while True:
+        print("What do you want to do?")
+        print("1. Fetch news for all feeds")
+        print("2. Fetch news for a single feed")
+        print("3. Add a new feed")
+        print("4. Remove a feed")
+        print("5. Exit")
+        choice = input("Enter your choice: ")
+        if choice == "1":
+            print("Fetching news for all feeds...")
+            news = fetch_news(fetch_feeds())
+            print_news(news)
+        elif choice == "2":
+            feeds = fetch_feeds()
+            print("Available feeds:")
+            for i, feed in enumerate(feeds, start=1):
+                print(f"{i}. {feed['name']}")
+            feed_choice = input("Enter feed number: ")
+            try:
+                feed_choice = int(feed_choice)
+                feed = feeds[feed_choice - 1]
+                print(f"Fetching news for {feed['name']}...")
+                news = fetch_news([feed])
+                print_news(news)
+            except (ValueError, IndexError):
+                print("Invalid feed choice!")
+        elif choice == "3":
+            add_feed()
+        elif choice == "4":
+            remove_feed()
+        elif choice == "5":
+            print("Goodbye!")
+            sys.exit()
+        else:
+            print("Invalid choice!")
 
-    # Configure logging
-    if args.verbose:
-        logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-    else:
-        logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.INFO)
-
-    # Parse the RSS feeds
-    articles = []
-    for url in urls:
-        feed = feedparser.parse(url)
-        if feed.bozo:
-            logging.warning(f'Unable to parse feed: {url}')
-            continue
-        for entry in feed.entries:
-            if 'title' not in entry or 'link' not in entry:
-                logging.warning(f'Missing title or link in entry: {entry}')
-                continue
-            articles.append(entry)
-
-    # Sort the articles by date
-    articles.sort(key=lambda x: x.published_parsed, reverse=True)
-
-    # Filter the articles by keyword, if specified
-    keyword = 'security'
-    if keyword:
-        articles = [a for a in articles if keyword in a.title.lower()]
-
-    # Limit the number of articles to display
-    articles = articles[:args.num_articles]
-
-    # Output the articles in the specified format
-    if args.output_format == 'text':
-        for i, article in enumerate(articles):
-            print(f'{TITLE_COLOR}{i+1}. {article.title}{RESET_COLOR}')
-            print(f'{LINK_COLOR}   {article.link}{RESET_COLOR}')
-            print()
-    elif args.output_format == 'html':
-        print('<ul>')
-        for article in articles:
-            print(f'<li><a href="{article.link}">{article.title}</a></li>')
-        print('</ul>')
-    elif args.output_format == 'json':
-        import json
-        print(json.dumps([{'title': a.title, 'link': a.link} for a in articles], indent=4))
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

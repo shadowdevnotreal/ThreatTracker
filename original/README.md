@@ -1,11 +1,5 @@
 # ThreatTracker
 
-###############
-#### TO DO ####
-#UPDATE README#
-###############
-
-
 ThreatTracker is a Python script that helps you stay up-to-date with the latest trends in cyber attacks, vulnerabilities, and threat actors by monitoring threat intelligence sources and displaying the top 5 articles.
 
 ![image](https://user-images.githubusercontent.com/3386569/220716272-209744d5-0a07-4950-931f-2cb09146b37e.png)
@@ -47,5 +41,3 @@ Contributions to ThreatTracker are welcome! To contribute, please fork the repos
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-### To Do
-<a href="https://www.buymeacoffee.com/mixedup4x4W" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
